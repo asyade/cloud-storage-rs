@@ -60,6 +60,7 @@ pub struct Token {
     access_scope: String,
 }
 
+/// Token data
 #[derive(Debug, Clone)]
 pub struct DefaultTokenData(String, u64);
 
@@ -76,7 +77,8 @@ impl Default for Token {
 }
 
 impl Token {
-    pub(crate) fn new(scope: &str) -> Self {
+    /// New
+    pub fn new(scope: &str) -> Self {
         Self {
             token: tokio::sync::RwLock::new(None),
             access_scope: scope.to_string(),
