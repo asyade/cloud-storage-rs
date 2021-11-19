@@ -94,6 +94,12 @@ impl Client {
         ObjectAccessControlClient(self)
     }
 
+    /// Get the auth token of this client
+    pub async fn get_bearer_token(&self) -> crate::Result<String> {
+        let token = self.token_cache.get(&self.client).await?;
+        Ok(format!("Bearer {}", token))
+    }
+
     async fn get_headers(&self) -> crate::Result<reqwest::header::HeaderMap> {
         let mut result = reqwest::header::HeaderMap::new();
         let token = self.token_cache.get(&self.client).await?;
